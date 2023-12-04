@@ -1,10 +1,18 @@
-let input = '55-50+40'
-let groups = input.split('-')
-let answer = 0
+let num = 18
+let count = 0
 
-for (let i=0; i<groups.length; i++) {
-  let cur = groups[i].split('+').map(Number).reduce((a, b) => a + b, 0)
-  if (i === 0) answer += cur // 첫 번째 그룹은 항상 덧셈
-  else answer -= cur // 두 번째 그룹부터 뺄셈
+
+while (num) {
+  if (num < 0) {
+    count = -1
+    break
+  }
+  if (num % 5 === 0) {
+    count += num / 5
+    break
+  } else {
+    num -= 3
+    count++
+  }
 }
-console.log(answer)
+console.log(count)
