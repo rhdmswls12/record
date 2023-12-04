@@ -1,9 +1,12 @@
-const coin_types = [500, 100, 50, 10]
-let n = 1260
-let count = 0
+let time = [3, 1, 4, 3, 2]
+let answer = 0
 
-for (const coin of coin_types) {
-  count += Math.floor(n/coin)
-  n %= coin
+time = time.sort((a, b) => a - b)
+for (let i=0; i<time.length; i++) {
+  let sum = 0
+  for (let j=0; j<=i; j++) {
+    sum += time[j]
+  }
+  answer += sum
 }
-console.log(count) // 6
+console.log(answer)
