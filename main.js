@@ -1,10 +1,10 @@
-let time = [3, 1, 4, 3, 2]
-let sum = 0
+let input = '55-50+40'
+let groups = input.split('-')
 let answer = 0
 
-time = time.sort((a, b) => a - b)
-for (let i=0; i<time.length; i++) {
-  sum += time[i] // i번 째 사람이 기다린 총 시간
-  answer += sum // 지금까지 소요된 총 시간
+for (let i=0; i<groups.length; i++) {
+  let cur = groups[i].split('+').map(Number).reduce((a, b) => a + b, 0)
+  if (i === 0) answer += cur // 첫 번째 그룹은 항상 덧셈
+  else answer -= cur // 두 번째 그룹부터 뺄셈
 }
 console.log(answer)
