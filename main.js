@@ -1,18 +1,15 @@
-let num = 18
-let count = 0
+// Cookie(쿠키)
 
+document.cookie = `a=1; max-age=${60*60*24}`
+document.cookie = `b=2; expires=${new Date(2023, 11, 15).toUTCString()}`
+document.cookie = 'a=3'
 
-while (num) {
-  if (num < 0) {
-    count = -1
-    break
-  }
-  if (num % 5 === 0) {
-    count += num / 5
-    break
-  } else {
-    num -= 3
-    count++
-  }
+console.log(document.cookie)
+ 
+function getCookie(name) {
+  const cookie = document.cookie
+  .split('; ')
+  .find(cookie => cookie.split('=')[0] === name)
+  return cookie ? cookie.split('=')[1] : null
 }
-console.log(count)
+console.log(getCookie('a'))
