@@ -1,15 +1,11 @@
-// Cookie(쿠키)
+// Storage(스토리지)
 
-document.cookie = `a=1; max-age=${60*60*24}`
-document.cookie = `b=2; expires=${new Date(2023, 11, 15).toUTCString()}`
-document.cookie = 'a=3'
+sessionStorage.setItem('a', 'Hello world!')
+sessionStorage.setItem('b', JSON.stringify({x: 1, y: 2}))
+sessionStorage.setItem('c', JSON.stringify(123))
 
-console.log(document.cookie)
- 
-function getCookie(name) {
-  const cookie = document.cookie
-  .split('; ')
-  .find(cookie => cookie.split('=')[0] === name)
-  return cookie ? cookie.split('=')[1] : null
-}
-console.log(getCookie('a'))
+console.log(sessionStorage.getItem('a'))
+console.log(JSON.parse(sessionStorage.getItem('b')))
+console.log(JSON.parse(sessionStorage.getItem('c')))
+
+sessionStorage.removeItem('a')
