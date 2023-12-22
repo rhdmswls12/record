@@ -1,17 +1,45 @@
-// History
+const page1 = /*html*/`
+  <section class="page1">
+    <h1>Page 1</h1>
+  </section>`
+const page2 = /*html*/`
+  <section class="page2">
+    <h1>Page 2</h1>
+  </section>`
+const page3 = /*html*/`
+  <section class="page3">
+    <h1>Page 3</h1>
+  </section>`
+const pageNotFound = /*html*/`
+  <section>
+    <h1>Page Not Found</h1>
+  </section>`
 
-// 브라우저 히스토리(세션 기록) 정보를 반환하거나 제어
+const pages = [
+  {path: '#/page1', template:page1},
+  {path: '#/page2', template:page2},
+  {path: '#/page3', template:page3}
+]
+const appEl = document.querySelector('#app')
 
-// .length: 등록된 히스토리 개수
-// .scrollRestoration: 히스토리 탐색 시 스크롤 위치 복원 여부 확인 및 지정
-// .state: 현재 히스토리에 등록된 데이터(상태)
+const render = () => {
+  const page = pages.find(page => page.path === location.hash)
+  appEl.innerHTML = page
+  ? page.template
+  : pageNotFound
+}
 
-// .back(): 뒤로 가기
-// .forward(): 앞으로 가기
-// .go(위치): 현재 페이지 기준 특정 히스토리 위치로 이동
+window.addEventListener('popstate', render)
+render() // 최초 한 번 실행
 
-// .pushState(상태, 제목, 주소): 히스토리에 상태 및 주소 추가
-// .replaceState(상태, 제목, 주소): 현재 히스토리의 상태 및 주소 교체
-// *모든 브라우저(사파리 제외)는 제목 옵션을 무시한다.
+const pagePush = num => {
+  history.pushState(`전달할 데이터 - ${num}`, null, `#/page${num}`)
+  render()
+}
 
-console.log(history)
+const inputEl = document.querySelector('nav input')
+inputEl.addEventListener('keydown', event => {
+  if (event.key === 'Enter') {
+    pagePush(event.target.value)
+  }
+})
