@@ -1,45 +1,21 @@
-const page1 = /*html*/`
-  <section class="page1">
-    <h1>Page 1</h1>
-  </section>`
-const page2 = /*html*/`
-  <section class="page2">
-    <h1>Page 2</h1>
-  </section>`
-const page3 = /*html*/`
-  <section class="page3">
-    <h1>Page 3</h1>
-  </section>`
-const pageNotFound = /*html*/`
-  <section>
-    <h1>Page Not Found</h1>
-  </section>`
+// 심볼(Symbol)
+import apple from './apple.js'
+import { birthKey, emailsKey } from './keys.js'
 
-const pages = [
-  {path: '#/page1', template:page1},
-  {path: '#/page2', template:page2},
-  {path: '#/page3', template:page3}
-]
-const appEl = document.querySelector('#app')
-
-const render = () => {
-  const page = pages.find(page => page.path === location.hash)
-  appEl.innerHTML = page
-  ? page.template
-  : pageNotFound
+const sKey = Symbol('Hello!')
+const user = {
+  key: '일반 정보!',
+  [sKey]: '민감한 정보!'
 }
 
-window.addEventListener('popstate', render)
-render() // 최초 한 번 실행
+console.log(user.key)
+console.log(user['key'])
+console.log(user[sKey])
+console.log(user[Symbol('Hello!')])
+console.log(sKey)
+console.log(typeof sKey)
 
-const pagePush = num => {
-  history.pushState(`전달할 데이터 - ${num}`, null, `#/page${num}`)
-  render()
-}
-
-const inputEl = document.querySelector('nav input')
-inputEl.addEventListener('keydown', event => {
-  if (event.key === 'Enter') {
-    pagePush(event.target.value)
-  }
-})
+console.log(apple)
+console.log(Object.keys(apple))
+console.log(apple[birthKey])
+console.log(apple[emailsKey])
