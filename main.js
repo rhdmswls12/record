@@ -1,27 +1,14 @@
 // 불변성 & 가변성
 
-let a = 1
-let b = a
+let a = { x: 1 }
+let b = { x: 1 }
 
-b = 2
+console.log(a === b) // 데이터를 바꾸기 전이어도 참조형이므로 false 출력
+
+b.x = 2
 
 console.log(b)
 console.log(a)
 
-let c = { x: 1 }
-let d = c
-
-d.x = 2
-
-console.log(d)
-console.log(c)
-
-c.x = 7
-console.log(d)
-console.log(c)
-
-d.x = 1
-console.log(d)
-console.log(c)
-
-console.log(c === d)
+console.log(1 === 1) // true
+console.log({} === {}) // false
