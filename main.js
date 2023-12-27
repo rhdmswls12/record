@@ -1,16 +1,27 @@
-// BigInt
+// 불변성 & 가변성
 
-console.log(12345677890123456789012345678901234567890)
-console.log(12345677890123456789012345678901234567890n)
-console.log(BigInt('12345677890123456789012345678901234567890'))
+let a = 1
+let b = a
 
-const a = 11n
-const b = 22
+b = 2
 
-// 숫자 => BigInt
-console.log(a + BigInt(b))
-console.log(typeof (a + BigInt(b)))
+console.log(b)
+console.log(a)
 
-// BigInt => 숫자
-console.log(Number(a) + b)
-console.log(typeof(Number(a) + b))
+let c = { x: 1 }
+let d = c
+
+d.x = 2
+
+console.log(d)
+console.log(c)
+
+c.x = 7
+console.log(d)
+console.log(c)
+
+d.x = 1
+console.log(d)
+console.log(c)
+
+console.log(c === d)
